@@ -1,0 +1,63 @@
+﻿@model IEnumerable<MessageApplication.Models.User>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>User Registration</h1>
+
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.UserName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Message)
+                
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Comment)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Like)
+            </th>
+            <th>
+                <a asp-action="AddorEdit" class="btn btn-outline-success">Create New User</a>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+            <td>
+                <div class="dropdown">
+                    <button class="dropbtn">
+                        @Html.DisplayFor(modelItem => item.Message)
+                                    </button>
+                    <div id="myDropdown" class="dropdown-content">
+                        <a href="#">Comment</a>
+                        <a href="#">Like</a>
+                        <a href="#">Share</a>
+                    </div>
+                </div>
+                
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Comment)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Like)
+            </td>
+            <td>
+                <a asp-action="AddorEdit" asp-route-id="@item.UserId"><i class="fa fa-marker fa-lg"></i></a> 
+                <a asp-action="Delete" asp-route-id="@item.UserId" class="text-danger ml-1" onclick="return confirm('Are You Sure To Delete This Record?')"><i class="fa fa-trash-alt fa-lg"></i></a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
